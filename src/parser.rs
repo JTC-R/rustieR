@@ -1,4 +1,8 @@
 pub	mod	parser																{
+    use ::function_name         ::named                                     ;
+
+    use crate       ::error     ::error     ::Error                         ;
+    use crate       ::log       ::log       ::Log                           ;
     use crate       ::lexer     ::lexer     ::Lexer                         ;
     use crate       ::token     ::token     ::Token                         ;
     use crate       ::ast       ::ast       ::Expr                          ;
@@ -10,7 +14,10 @@ pub	mod	parser																{
     }
 
     impl<'a> Parser<'a>                                                     {
+
+        #[named]
         pub fn  new(mut lexer: Lexer<'a>)                                   ->  Self        {
+            Log::debug()
             let current_token   :Token          =   lexer.next_token()      ;
             let parser          :Parser         =   Parser                  {
                 lexer   :   lexer               ,
@@ -24,6 +31,7 @@ pub	mod	parser																{
         pub fn  advance(&mut self)                                          {
             self.cur_tok                        =   self.lexer.next_token();
         }
+        #[named]
         pub fn  parse_expression(&mut self)                                 ->  Expr        {
             let cur_tok = self.current_token().clone();
             println!("Parsing: {:?}", cur_tok);
