@@ -1,7 +1,7 @@
 pub	mod	parser																{
     use ::function_name         ::named                                     ;
 
-    use crate       ::error     ::error     ::Error                         ;
+    use crate       ::errors    ::errors    ::Errors                        ;
     use crate       ::log       ::log       ::Log                           ;
     use crate       ::lexer     ::lexer     ::Lexer                         ;
     use crate       ::token     ::token     ::Token                         ;
@@ -17,7 +17,6 @@ pub	mod	parser																{
 
         #[named]
         pub fn  new(mut lexer: Lexer<'a>)                                   ->  Self        {
-            Log::debug()
             let current_token   :Token          =   lexer.next_token()      ;
             let parser          :Parser         =   Parser                  {
                 lexer   :   lexer               ,
@@ -54,7 +53,7 @@ pub	mod	parser																{
                     self.parse_assignment()
                 },
                 Token::RightParen                                           =>  {
-
+                    todo!();
                 },
                 _                                                           =>  {
                     panic!("Not sure what this is!");

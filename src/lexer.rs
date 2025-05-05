@@ -1,5 +1,9 @@
 pub mod lexer                                                               {
-    use crate   ::token     ::token     ::Token                             ;
+    use             ::function_name ::named                                 ;
+    use crate       ::errors        ::errors        ::Errors                ;
+    use crate       ::log           ::log           ::Log                   ;
+    use crate       ::token         ::token         ::Token                 ;
+
 
     #[derive(Debug)]
     pub struct  Lexer<'a>                                                   {
@@ -15,8 +19,18 @@ pub mod lexer                                                               {
             };
             return  lexer
         }
+        #[named]
         pub fn  current_char(&self)                                         ->  char        {
-            return  self.input[self.pos..].chars().next().unwrap()
+            let cc          :char           =  self
+                .input[self.pos..].chars().next().unwrap()                  ;
+            //INFO: Eventually, This will be a MutexGaurd but for now, manual
+            //toggeling from within Log::Debug
+            Log::debug(
+                    &format!("Current Lexer Char: {}", &cc.clone().to_string()) ,
+                    line!()                                                     ,
+                    function_name!()                                            ,
+                    file!()                                                 )   ;
+            return  cc
         }
         pub fn  peek_char(&self)                                            ->  Option<char>{
             return  self.input[self.pos..].chars().nth(1)
