@@ -14,3 +14,23 @@ fn main() {
         .parse_expression()                                                 ;
     println!("{:?}", ast)                                                   ;
 }
+
+
+
+#[cfg(test)]
+mod tests                                                                   {
+    use super   ::*                                                         ;
+    use         ::function_name     ::named                                 ;
+
+    #[test]
+    #[named]
+    fn  test_logging_output()                                               {
+        use transposer              ::log       ::log       ::Log           ;
+        //NOTE: This needs to be ran with cargo test -- --show-output
+        Log::debug(
+                "Test debugging"                ,
+                line!()                         ,
+                function_name!()                ,
+                file!()                         )                           ;
+    }
+}
